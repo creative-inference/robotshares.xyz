@@ -46,13 +46,7 @@
             color: #FFFF00; /* Bright Yellow */
             font-weight: bold;
         }
-        .logo-placeholder { /* For a simple ASCII art or pixel art logo */
-            font-size: 3em;
-            margin-bottom: 20px;
-            line-height: 1;
-            /* Example ASCII art (replace with an image or better ASCII) */
-            white-space: pre; /* Preserve whitespace for ASCII art */
-        }
+
         .footer {
             margin-top: 30px;
             font-size: 0.9em;
@@ -66,8 +60,7 @@
             text-decoration: underline;
         }
 
-        /* Optional: Scanline effect (can be performance intensive for simple pages) */
-        /*
+
         body::after {
             content: " ";
             display: block;
@@ -81,12 +74,20 @@
             background-size: 100% 4px, 3px 100%;
             pointer-events: none;
         }
-        */
+
+        pre {
+            font-size: 1em; /* Adjust size as needed */
+            line-height: 1; /* Can help with alignment */
+            border: 1px solid #ccc; /* Optional: border around the art */
+            padding: 15px; /* Optional: padding */
+            background-color: #fff; /* Optional: background for the pre block */
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
-       <pre class="">
+       <pre>
 
          __
  _(\    |@@|
