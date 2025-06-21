@@ -1,0 +1,84 @@
+/* --- General Body and Background Styling --- */
+body {
+    /* The new background image */
+    background-image: url('img/rs_bg.png');
+    background-size: cover;          /* Cover the entire viewport */
+    background-position: center center; /* Center the image */
+    background-attachment: fixed;     /* Keep it fixed while scrolling */
+    background-repeat: no-repeat;     /* Do not tile the image */
+
+    /* Font and centering from previous design */
+    font-family: 'Courier New', Courier, monospace;
+    color: #28c2c5; /* Bright Green/Cyan text */
+    margin: 0;
+    padding: 20px; /* Give some space around the container on small screens */
+
+    /* Flexbox to center the content pane vertically and horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* --- Translucent Content Container --- */
+.container {
+    /* The key to readability: a dark, translucent background */
+    background-color: rgba(10, 20, 35, 0.88); /* Dark navy blue, 88% opaque */
+    border: 3px solid #33aeef;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.7); /* Softened the green glow */
+    
+    padding: 25px 40px;
+    width: 90%;
+    max-width: 700px;
+    text-align: center;
+    border-radius: 4px; /* Slightly rounded corners */
+}
+
+/* --- Typography and Element Styling --- */
+h1 {
+    font-size: 2.5em;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 7px #b63875; /* A more pronounced pink/magenta shadow */
+}
+
+p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.highlight {
+    color: #FFFF00; /* Bright Yellow */
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(255, 255, 0, 0.4);
+}
+
+a {
+    color: #00AAAA; /* Cyan/Teal link */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #FFFF00; /* Yellow on hover */
+    text-decoration: underline;
+}
+
+.footer {
+    margin-top: 30px;
+    font-size: 0.9em;
+    
+    /* --- THE FIX --- */
+    color: #a0c9d1; /* A much lighter, thematic blue-gray */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Dark shadow for contrast */
+    
+    border-top: 1px solid #444; /* Made the border slightly brighter too */
+    padding-top: 20px;
+}
+
+.footer a {
+    margin: 0 10px;
+}
