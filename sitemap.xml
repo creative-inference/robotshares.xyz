@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://robotshares.xyz/</loc>
+    <lastmod>2025-07-05T20:03:10.104Z</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://robotshares.xyz/about.html</loc>
+    <lastmod>2025-07-05T20:03:10.104Z</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://robotshares.xyz/about-taraxa.html</loc>
+    <lastmod>2025-07-05T20:03:10.104Z</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://robotshares.xyz/journal/progress-update-for-250630.html</loc>
+    <lastmod>2025-06-30T05:16:31.000Z</lastmod>
+    <priority>0.7</priority>
+  </url>
+</urlset>

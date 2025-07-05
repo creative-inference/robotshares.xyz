@@ -134,3 +134,45 @@ a:hover {
     color: #a0c9d1;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 }   
+
+
+/* --- Journal Index Page Styles --- */
+.post-list-item {
+    border: 1px solid #333;
+    padding: 20px;
+    margin-bottom: 30px;
+    text-align: left;
+    background-color: rgba(10, 20, 35, 0.5);
+    border-radius: 4px;
+}
+
+.post-list-item h2 a {
+    text-decoration: none;
+    color: #33aeef;
+}
+.post-list-item h2 a:hover {
+    color: #ffff00;
+}
+
+.post-meta {
+    font-size: 0.9em;
+    color: #a0c9d1;
+    margin-bottom: 15px;
+}
+
+.post-excerpt p {
+    margin: 0;
+}
+
+/* --- Single Journal Post Styles --- */
+.journal-entry {
+    text-align: left;
+}
+
+.featured-image {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 20px 0;
+    border: 2px solid #333;
+}
