@@ -176,3 +176,213 @@ a:hover {
     margin: 20px 0;
     border: 2px solid #333;
 }
+
+/* --- Platform Primitives --- */
+.primitive-section {
+    border: 1px solid #33aeef;
+    border-left: 4px solid #FFFF00;
+    padding: 25px 30px;
+    margin: 30px 0;
+    text-align: left;
+    background-color: rgba(10, 20, 35, 0.6);
+    border-radius: 4px;
+}
+
+.primitive-section h2 {
+    color: #FFFF00;
+    font-size: 1.4em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 0;
+    margin-bottom: 5px;
+    text-shadow: 0 0 5px rgba(255, 255, 0, 0.3);
+}
+
+.primitive-section .primitive-tag {
+    display: inline-block;
+    background-color: rgba(51, 174, 239, 0.2);
+    border: 1px solid #33aeef;
+    color: #33aeef;
+    font-size: 0.75em;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.primitive-section p {
+    font-size: 1em;
+    line-height: 1.7;
+}
+
+/* --- ASCII Schematics --- */
+.schematic {
+    background-color: rgba(0, 10, 20, 0.9);
+    border: 1px solid #33aeef;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 20px 0;
+    overflow-x: auto;
+    position: relative;
+}
+
+.schematic pre {
+    color: #00ff88;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8em;
+    line-height: 1.5;
+    margin: 0;
+    white-space: pre;
+    text-shadow: 0 0 4px rgba(0, 255, 136, 0.4);
+}
+
+.schematic-label {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 0.65em;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- Image Prompt Placeholders --- */
+.image-placeholder {
+    border: 2px dashed #b63875;
+    border-radius: 4px;
+    padding: 30px 20px;
+    margin: 25px 0;
+    text-align: center;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(10, 20, 35, 0.8),
+        rgba(10, 20, 35, 0.8) 10px,
+        rgba(20, 30, 50, 0.8) 10px,
+        rgba(20, 30, 50, 0.8) 20px
+    );
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-placeholder .prompt-label {
+    color: #b63875;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.image-placeholder .prompt-text {
+    color: #a0c9d1;
+    font-size: 0.85em;
+    font-style: italic;
+    max-width: 500px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.image-placeholder .prompt-id {
+    color: #555;
+    font-size: 0.65em;
+    margin-top: 10px;
+    letter-spacing: 1px;
+}
+
+/* --- Use Case Cards --- */
+.use-case {
+    border: 1px solid #33aeef;
+    padding: 25px 30px;
+    margin: 30px 0;
+    text-align: left;
+    background-color: rgba(10, 20, 35, 0.5);
+    border-radius: 4px;
+}
+
+.use-case h2 {
+    color: #28c2c5;
+    font-size: 1.3em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 0;
+}
+
+.use-case h3 {
+    color: #FFFF00;
+    font-size: 1em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* --- Comparison Table --- */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.85em;
+}
+
+.comparison-table th {
+    background-color: rgba(51, 174, 239, 0.2);
+    color: #FFFF00;
+    padding: 10px 12px;
+    text-align: left;
+    border: 1px solid #33aeef;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 1px;
+}
+
+.comparison-table td {
+    padding: 8px 12px;
+    border: 1px solid #1a3a4a;
+    color: #a0c9d1;
+}
+
+.comparison-table tr:nth-child(even) {
+    background-color: rgba(10, 20, 35, 0.4);
+}
+
+/* --- Flow Steps --- */
+.flow-steps {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+    text-align: left;
+}
+
+.flow-steps li {
+    padding: 8px 0 8px 30px;
+    position: relative;
+    color: #a0c9d1;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+.flow-steps li::before {
+    content: attr(data-step);
+    position: absolute;
+    left: 0;
+    color: #FFFF00;
+    font-weight: bold;
+    font-size: 0.85em;
+}
+
+/* --- Section Divider --- */
+.section-divider {
+    text-align: center;
+    color: #333;
+    margin: 40px 0;
+    font-size: 0.8em;
+    letter-spacing: 5px;
+}
+
+/* --- Subtitle --- */
+.subtitle {
+    color: #a0c9d1;
+    font-size: 0.95em;
+    margin-top: -5px;
+}

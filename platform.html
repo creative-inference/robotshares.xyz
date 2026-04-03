@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROBOTSHARES - The Platform</title>
+
+    <link rel="icon" href="/img/rs-logo.jpg" type="image/jpeg">
+    <link rel="apple-touch-icon" href="/img/rs-logo.jpg">
+    <link rel="stylesheet" href="/style.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6NTFYK5EC1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6NTFYK5EC1');
+</script>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <a href="/" class="nav-logo">
+            <img src="/img/rs-logo.jpg" alt="Robotshares Logo">
+        </a>
+        <div class="nav-links">
+            <a href="/about.html">About</a>
+            <a href="/platform.html">Platform</a>
+            <a href="/use-cases.html">Use Cases</a>
+            <a href="/about-vprogs.html">vProgs</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+<h1>The Platform</h1>
+<p class="subtitle">Five primitives for machines that own themselves.</p>
+
+<div class="page-content">
+
+<p>Robot Shares provides a modular stack of on-chain primitives — built on <a href="https://kaspa.org" target="_blank">Kaspa</a> and <a href="/about-vprogs.html">vProgs</a> — that give machines everything they need to operate as autonomous economic agents. Each primitive is a sovereign vProg on Kaspa L1, communicating through ZK-verified state transitions with instant DAG finality.</p>
+
+<div class="image-placeholder">
+    <div class="prompt-label">[ Image: Platform Overview ]</div>
+    <p class="prompt-text">Dark futuristic blueprint showing five glowing hexagonal modules arranged in a pentagon formation, connected by luminous data streams. Each hexagon contains an icon: fingerprint (identity), grid of dots (registry), lightning bolt (payments), shield lock (access), checkmark seal (verify). Center shows the Kaspa blockDAG as an interconnected mesh of nodes. Color palette: deep navy background, cyan and electric yellow accents, subtle green data flow lines. Technical blueprint aesthetic with circuit board traces.</p>
+    <div class="prompt-id">IMG-PLATFORM-001</div>
+</div>
+
+<div class="schematic">
+    <span class="schematic-label">architecture</span>
+<pre>
+    +=====================================================+
+    |              ROBOT SHARES PLATFORM                   |
+    |=====================================================|
+    |                                                     |
+    |   +----------+  +----------+  +----------+          |
+    |   |  RS-ID   |  | RS-PAY   |  |RS-ACCESS |          |
+    |   | Machine  |  | Escrow & |  | Role-    |          |
+    |   | Identity |  | Micro-tx |  | Based    |          |
+    |   +----+-----+  +----+-----+  +----+-----+          |
+    |        |              |              |               |
+    |   +----+--------------+--------------+----+          |
+    |   |         RS-REGISTRY                   |          |
+    |   |    On-Chain Machine Directory          |          |
+    |   +----+--------------+--------------+----+          |
+    |        |              |              |               |
+    |   +----+-----+  +----+-----+                        |
+    |   |RS-VERIFY |  |  vProg   |                        |
+    |   | ZK Data  |  | Runtime  |                        |
+    |   | Proofs   |  |          |                        |
+    |   +----+-----+  +----+-----+                        |
+    |        |              |                              |
+    |   +----+--------------+----+                        |
+    |   |   KASPA L1 BLOCKDAG    |                        |
+    |   |  DagKnight + PoW + ZK  |                        |
+    |   +------------------------+                        |
+    +=====================================================+
+</pre>
+</div>
+
+<!-- ============================================ -->
+<!-- RS-ID: Machine Identity                      -->
+<!-- ============================================ -->
+
+<div class="primitive-section">
+    <h2>RS-ID</h2>
+    <span class="primitive-tag">Self-Sovereign Machine Identity</span>
+
+    <p>Every machine in the Robot Shares network gets a cryptographic identity anchored to Kaspa L1. No central authority issues or revokes these identities — they are self-sovereign, owned by the machine (or its operator), and verifiable by anyone.</p>
+
+    <p>RS-ID is built on the <strong>W3C Decentralized Identifier (DID)</strong> standard. Each machine generates its own keypair, registers a DID document as state in the RS-ID vProg, and can present verifiable credentials to any peer. The identity persists on-chain, secured by Kaspa's proof-of-work consensus — no staking cartel or governance vote can revoke it.</p>
+
+    <p><strong>How it works:</strong></p>
+    <ul class="flow-steps">
+        <li data-step="01 ">Machine generates an ECDSA keypair on its secure element or TPM</li>
+        <li data-step="02 ">Operator submits a DID registration transaction to the RS-ID vProg</li>
+        <li data-step="03 ">vProg executes off-chain, generates a ZK proof of valid registration</li>
+        <li data-step="04 ">Proof settles on Kaspa L1 — identity is now globally verifiable</li>
+        <li data-step="05 ">Machine can issue and present Verifiable Credentials (capabilities, certifications, service history)</li>
+    </ul>
+
+    <div class="schematic">
+        <span class="schematic-label">rs-id flow</span>
+<pre>
+  +-------------+       +------------------+       +----------------+
+  |   MACHINE   |       |    RS-ID vProg   |       |   KASPA L1     |
+  |  (Bot0)     |       |  (off-chain)     |       |   (on-chain)   |
+  +------+------+       +--------+---------+       +-------+--------+
+         |                       |                         |
+         | 1. Generate keypair   |                         |
+         |   (ECDSA / Ed25519)   |                         |
+         |                       |                         |
+         | 2. Submit DID doc     |                         |
+         |---------------------->|                         |
+         |                       |                         |
+         |                       | 3. Validate & execute   |
+         |                       |    state transition     |
+         |                       |                         |
+         |                       | 4. Generate ZK proof    |
+         |                       |                         |
+         |                       | 5. Submit proof +       |
+         |                       |    state commitment     |
+         |                       |------------------------>|
+         |                       |                         |
+         |                       |         6. Verify proof |
+         |                       |            DAG finality |
+         |                       |                         |
+         | 7. Identity live                                |
+         |<================================================|
+         |                                                 |
+         | 8. Present credentials to peers                 |
+         |================================================>|
+</pre>
+    </div>
+
+    <div class="image-placeholder">
+        <div class="prompt-label">[ Image: Machine Identity ]</div>
+        <p class="prompt-text">A humanoid robot standing in a dark server room, holding up a glowing holographic ID card that displays a cryptographic hash, a QR code, and the text "DID:KASPA:0x..." in cyan text. The robot's chest displays a subtle Kaspa logo. Streams of encrypted data flow from the ID card to a blockchain visualization behind it. Moody cyberpunk lighting with teal and magenta accents. Photorealistic digital art style.</p>
+        <div class="prompt-id">IMG-RSID-001</div>
+    </div>
+</div>
+
+<div class="section-divider">- - - - - - - - - - - - -</div>
+
+<!-- ============================================ -->
+<!-- RS-REGISTRY: Machine Directory               -->
+<!-- ============================================ -->
+
+<div class="primitive-section">
+    <h2>RS-Registry</h2>
+    <span class="primitive-tag">On-Chain Machine Directory</span>
+
+    <p>RS-Registry is the global phonebook for machines. When a drone needs a charging station, or a sensor network needs a data aggregator, or a delivery bot needs a handoff partner — they query the registry. Every machine that registers its RS-ID can also publish its <strong>capabilities</strong>, <strong>location</strong>, <strong>service offerings</strong>, and <strong>pricing</strong> to the registry vProg.</p>
+
+    <p>Because the registry lives in a vProg's sovereign state, queries are resolved off-chain with ZK-verified results. A machine can prove it found a valid registry entry without the entire network re-executing the search. This means the registry scales to millions of machines without burdening Kaspa L1.</p>
+
+    <p><strong>Registry entry schema:</strong></p>
+
+    <div class="schematic">
+        <span class="schematic-label">registry entry</span>
+<pre>
+  {
+    "did":          "did:kaspa:0x7a3f...b2c1",
+    "type":         "charging-station",
+    "capabilities": ["level-2-ac", "dc-fast-charge", "solar-powered"],
+    "location":     { "lat": 37.7749, "lng": -122.4194, "radius_m": 50 },
+    "services": [
+      {
+        "name":     "dc-fast-charge",
+        "rate":     "0.0012 KAS/kWh",
+        "escrow":   "covenant:0x9f1e...a4d8"
+      }
+    ],
+    "status":       "online",
+    "reputation":   { "completed": 1847, "disputes": 2, "uptime": 0.997 },
+    "credentials":  ["cert:UL-listed", "cert:iso-15118"],
+    "last_seen":    "block:4829174"
+  }
+</pre>
+    </div>
+
+    <p><strong>Discovery flow:</strong> A machine broadcasts a service query (e.g., "DC fast charge within 2km"). The RS-Registry vProg processes the query off-chain, returns matching entries with a ZK proof that the results are authentic and complete. The requesting machine verifies the proof locally — no trust required.</p>
+
+    <div class="schematic">
+        <span class="schematic-label">discovery</span>
+<pre>
+  Bot0 (drone, low battery)          RS-Registry vProg         Charger Bot1
+  ========================          ==================         ============
+         |                                  |                       |
+         | "Find DC charger < 2km"          |                       |
+         |--------------------------------->|                       |
+         |                                  |                       |
+         |   Result: [Bot1] + ZK proof      |                       |
+         |<---------------------------------|                       |
+         |                                  |                       |
+         | Verify proof locally             |                       |
+         | (no trust needed)                |                       |
+         |                                  |                       |
+         | Initiate RS-Pay escrow with Bot1                         |
+         |--------------------------------------------------------->|
+         |                                  |                       |
+</pre>
+    </div>
+
+    <div class="image-placeholder">
+        <div class="prompt-label">[ Image: Machine Registry ]</div>
+        <p class="prompt-text">Top-down aerial view of a futuristic smart city at night. Hundreds of small machines (drones, ground robots, charging stations, sensors) are visible as glowing dots on the streets and rooftops, each with a small holographic data card floating above it showing their type and status. Thin cyan lines connect nearby machines forming a mesh network. A large transparent holographic grid overlays the city — the registry. Dark background, neon cyan/teal/yellow palette. Architectural visualization style.</p>
+        <div class="prompt-id">IMG-REGISTRY-001</div>
+    </div>
+</div>
+
+<div class="section-divider">- - - - - - - - - - - - -</div>
+
+<!-- ============================================ -->
+<!-- RS-PAY: Machine Payments                     -->
+<!-- ============================================ -->
+
+<div class="primitive-section">
+    <h2>RS-Pay</h2>
+    <span class="primitive-tag">Autonomous Machine Payments</span>
+
+    <p>Machines need to pay each other — instantly, cheaply, and without asking a human for permission. RS-Pay provides <strong>covenant-based escrow</strong> for service payments and <strong>direct KAS micro-transactions</strong> for simple value transfer, all settling on Kaspa L1 with sub-second finality.</p>
+
+    <p>Unlike payment systems that rely on multisig wallets or centralized escrow services, RS-Pay uses <strong>Silverscript covenants</strong> — spending conditions enforced directly by Kaspa's consensus. When Bot0 wants to pay Bot1 for a charging session, the KAS is locked in a covenant UTXO with conditions that release funds only when the service is verifiably complete.</p>
+
+    <p><strong>Why Kaspa is uniquely suited for machine payments:</strong></p>
+    <table class="comparison-table">
+        <tr>
+            <th>Property</th>
+            <th>Requirement</th>
+            <th>Kaspa</th>
+        </tr>
+        <tr>
+            <td>Finality</td>
+            <td>Machines can't wait minutes</td>
+            <td>Instant (DagKnight)</td>
+        </tr>
+        <tr>
+            <td>Cost</td>
+            <td>Billions of micro-tx must be viable</td>
+            <td>Fractions of a cent</td>
+        </tr>
+        <tr>
+            <td>Throughput</td>
+            <td>IoT scale: thousands of tx/sec</td>
+            <td>BlockDAG parallel processing</td>
+        </tr>
+        <tr>
+            <td>Censorship</td>
+            <td>No authority can block machine tx</td>
+            <td>Pure PoW, no validators to bribe</td>
+        </tr>
+        <tr>
+            <td>Programmability</td>
+            <td>Escrow, conditions, time-locks</td>
+            <td>Silverscript covenants + vProgs</td>
+        </tr>
+    </table>
+
+    <div class="schematic">
+        <span class="schematic-label">escrow payment flow</span>
+<pre>
+  Bot0 (consumer)                  Kaspa L1 Covenant               Bot1 (provider)
+  ===============                  =================               ===============
+        |                                |                               |
+        | 1. Lock 5 KAS in               |                               |
+        |    escrow covenant              |                               |
+        |------------------------------->|                               |
+        |                                |                               |
+        |          2. Covenant created    |                               |
+        |          Conditions:            |                               |
+        |          - Release to Bot1      |                               |
+        |            on service proof     |                               |
+        |          - Refund to Bot0       |                               |
+        |            after timeout        |                               |
+        |                                |                               |
+        | 3. Request service              |                               |
+        |--------------------------------------------------------------->|
+        |                                |                               |
+        |                                |    4. Provide service          |
+        |<---------------------------------------------------------------|
+        |                                |       (e.g., 30 min charge)   |
+        |                                |                               |
+        |                                |    5. Submit service proof     |
+        |                                |<------------------------------|
+        |                                |                               |
+        |          6. Covenant validates  |                               |
+        |             proof, releases     |                               |
+        |             5 KAS to Bot1       |                               |
+        |                                |------------------------------->|
+        |                                |                               |
+        |                        7. Settled. Instant DAG finality.       |
+        |                                |                               |
+</pre>
+    </div>
+
+    <p><strong>Streaming payments:</strong> For ongoing services (continuous data feeds, extended charging sessions), RS-Pay supports <strong>payment channels</strong> via covenant state updates — micro-payments stream in real-time, with only the final settlement hitting L1. A sensor selling live telemetry can get paid per-reading without each reading requiring an on-chain transaction.</p>
+
+    <div class="image-placeholder">
+        <div class="prompt-label">[ Image: Machine Payments ]</div>
+        <p class="prompt-text">Two robots facing each other in a dark industrial setting. Between them, a stream of glowing golden coins (KAS tokens) flows through a transparent crystalline escrow container shaped like a hexagonal prism. The left robot (sleek drone design) is receiving energy from a charging cable connected to the right robot (industrial charging station). Above the escrow, a holographic smart contract displays the terms. Lightning bolt effects around the transaction. Dark moody lighting, gold and cyan color scheme. Cinematic 3D render.</p>
+        <div class="prompt-id">IMG-RSPAY-001</div>
+    </div>
+</div>
+
+<div class="section-divider">- - - - - - - - - - - - -</div>
+
+<!-- ============================================ -->
+<!-- RS-ACCESS: Permission Management             -->
+<!-- ============================================ -->
+
+<div class="primitive-section">
+    <h2>RS-Access</h2>
+    <span class="primitive-tag">Role-Based Machine Permissions</span>
+
+    <p>Not every machine should be able to interact with every other machine. A warehouse robot shouldn't unlock a delivery drone's cargo bay. A rogue sensor shouldn't inject data into a fleet's telemetry stream. RS-Access provides <strong>on-chain role-based access control (RBAC)</strong> — machines authenticate peers and enforce fine-grained permissions before granting access to services, data, or physical resources.</p>
+
+    <p>Access rules are encoded in the RS-Access vProg state. When Machine A requests access to Machine B's service, Machine B queries the vProg to verify A's credentials and role. The check executes off-chain with a ZK proof — Machine B gets a cryptographic guarantee that A is authorized, without revealing A's full credential set.</p>
+
+    <p><strong>Permission model:</strong></p>
+
+    <div class="schematic">
+        <span class="schematic-label">rbac structure</span>
+<pre>
+  ROLES                    PERMISSIONS                   RESOURCES
+  =====                    ===========                   =========
+
+  fleet-operator --------> [manage, deploy, recall] ----> drone-fleet-alpha
+                    |
+                    +----> [view, export] --------------> telemetry-stream
+                    |
+                    +----> [initiate] ------------------> rs-pay escrow
+
+  service-provider ------> [advertise, accept-job] -----> charging-services
+                    |
+                    +----> [submit] --------------------> service-proofs
+
+  data-consumer ---------> [query, subscribe] ----------> sensor-data-feed
+                    |
+                    +----> [verify] --------------------> data-provenance
+
+  guest-machine ---------> [discover] ------------------> rs-registry (read-only)
+</pre>
+    </div>
+
+    <p><strong>Zero-knowledge credential checks:</strong> A critical advantage of building access control on vProgs is that credential verification can happen in zero knowledge. A drone can prove it has a valid FAA certification without revealing the certificate number. A charging station can prove it meets safety standards without exposing its full audit history. The ZK proof says "yes, authorized" — nothing more.</p>
+
+    <div class="image-placeholder">
+        <div class="prompt-label">[ Image: Machine Access Control ]</div>
+        <p class="prompt-text">A futuristic security checkpoint scene. A small delivery robot approaches a large glowing gateway made of intersecting laser grids. The gateway scans the robot with a cone of blue light, and a holographic shield icon appears overhead — green checkmark, "ACCESS GRANTED". Behind the gateway, a secured warehouse full of cargo-carrying drones is visible. Other robots with red X marks are being turned away at adjacent gates. Cyberpunk industrial aesthetic, deep blue and green lighting with red accents for denied access. Wide-angle composition.</p>
+        <div class="prompt-id">IMG-RSACCESS-001</div>
+    </div>
+</div>
+
+<div class="section-divider">- - - - - - - - - - - - -</div>
+
+<!-- ============================================ -->
+<!-- RS-VERIFY: Data Verification                 -->
+<!-- ============================================ -->
+
+<div class="primitive-section">
+    <h2>RS-Verify</h2>
+    <span class="primitive-tag">ZK-Proven Machine Data</span>
+
+    <p>Machine-generated data is only valuable if you can trust it. A temperature sensor's reading is worthless if someone can spoof it. A drone's GPS coordinates are dangerous if they can be falsified. RS-Verify provides a <strong>three-tier data verification framework</strong> that gives machine data cryptographic integrity guarantees — all powered by vProgs' native ZK proving pipeline.</p>
+
+    <p><strong>The three tiers:</strong></p>
+
+    <div class="schematic">
+        <span class="schematic-label">verification tiers</span>
+<pre>
+  TIER 1: ORIGIN AUTHENTICATION          TIER 2: PATTERN ANALYSIS
+  ============================          ========================
+
+  Machine signs data with               AI/ML models analyze data
+  its RS-ID private key.                streams for anomalies.
+  Anyone can verify the                 Flags impossible readings,
+  signature against the                 statistical outliers, and
+  machine's on-chain DID.              suspicious patterns.
+
+  Proves: "This data came               Proves: "This data is
+   from this specific machine"           consistent and plausible"
+
+
+  TIER 3: CROSS-VERIFICATION            SETTLEMENT
+  =========================             ==========
+
+  Multiple independent machines          All three tiers produce
+  corroborate the same data             evidence that feeds into
+  point. Consensus across               a ZK proof. The proof
+  independent observers.                settles on Kaspa L1.
+
+  Proves: "Multiple machines             Result: Immutable,
+   independently agree"                  verifiable data record
+</pre>
+    </div>
+
+    <p><strong>The ZK advantage:</strong> Traditional data verification stores raw data on-chain (expensive, privacy-leaking) or relies on trusted oracles (centralized point of failure). RS-Verify generates a compact ZK proof that attests to data integrity — the proof settles on Kaspa L1, but the raw data stays off-chain. A supply chain sensor can prove "temperature stayed between 2-8°C for 72 hours" without revealing the actual readings, the route, or any other business-sensitive data.</p>
+
+    <div class="schematic">
+        <span class="schematic-label">data verification flow</span>
+<pre>
+  Sensor Network              RS-Verify vProg           Kaspa L1        Data Consumer
+  ==============              ===============           ========        =============
+       |                            |                      |                 |
+       | Raw readings               |                      |                 |
+       | (temp, GPS, accel...)      |                      |                 |
+       |--------------------------->|                      |                 |
+       |                            |                      |                 |
+       |                   Tier 1: Verify origin sig       |                 |
+       |                   Tier 2: Run anomaly check       |                 |
+       |                   Tier 3: Cross-ref peers         |                 |
+       |                            |                      |                 |
+       |                   Generate ZK proof of            |                 |
+       |                   data integrity                  |                 |
+       |                            |                      |                 |
+       |                            | Proof + commitment   |                 |
+       |                            |--------------------->|                 |
+       |                            |                      |                 |
+       |                            |              Verify & finalize         |
+       |                            |                      |                 |
+       |                            |                      | Query verified  |
+       |                            |                      | data record     |
+       |                            |                      |<----------------|
+       |                            |                      |                 |
+       |                            |                      | Return proof +  |
+       |                            |                      | attestation     |
+       |                            |                      |---------------->|
+</pre>
+    </div>
+
+    <div class="image-placeholder">
+        <div class="prompt-label">[ Image: Data Verification ]</div>
+        <p class="prompt-text">A network of floating IoT sensors (temperature probes, cameras, air quality monitors) arranged in a 3D grid formation, each emitting a thin beam of data (visualized as streams of binary code). All beams converge on a central glowing orb — the ZK proof generator — which compresses them into a single bright golden beam that shoots down into a crystalline representation of the Kaspa blockchain below. Three concentric rings around the orb represent the three verification tiers, each glowing a different color (blue, green, purple). Dark space background. Scientific visualization aesthetic.</p>
+        <div class="prompt-id">IMG-RSVERIFY-001</div>
+    </div>
+</div>
+
+<div class="section-divider">= = = = = = = = = = = = =</div>
+
+<!-- ============================================ -->
+<!-- HOW IT ALL CONNECTS                          -->
+<!-- ============================================ -->
+
+<h2 style="text-align:center; color:#FFFF00;">How It All Connects</h2>
+
+<p>The five primitives are not isolated tools — they compose. A single machine interaction might touch all five in a single atomic transaction, thanks to vProgs' synchronous composability:</p>
+
+<div class="schematic">
+    <span class="schematic-label">full interaction</span>
+<pre>
+  DRONE (Bot0)                                          CHARGER (Bot1)
+  ============                                          ==============
+       |                                                      |
+       | 1. RS-REGISTRY: "Find charger near me"               |
+       |----------------------------------------------------->|
+       |                                                      |
+       | 2. RS-ID: Exchange + verify DIDs                     |
+       |<---------------------------------------------------->|
+       |                                                      |
+       | 3. RS-ACCESS: "Does Bot0 have charging permission?"  |
+       |----------------------------------------------------->|
+       |                           Verified (ZK) <<<          |
+       |                                                      |
+       | 4. RS-PAY: Lock KAS in escrow covenant               |
+       |----------------------------------------------------->|
+       |                                                      |
+       |            *** CHARGING SESSION ***                   |
+       |<====================================================>|
+       |                                                      |
+       | 5. RS-VERIFY: Bot1 submits charge-complete proof     |
+       |<-----------------------------------------------------|
+       |                                                      |
+       | 6. RS-PAY: Covenant releases KAS to Bot1             |
+       |----------------------------------------------------->|
+       |                                                      |
+       |        ALL SETTLED ON KASPA L1. ONE ATOMIC TX.       |
+       |                                                      |
+</pre>
+</div>
+
+<p>This entire flow — discovery, authentication, authorization, payment, service delivery, verification, and settlement — can execute as a <strong>single atomic operation</strong> on Kaspa L1. If any step fails, the whole transaction rolls back. No partial states. No stuck funds. No disputes.</p>
+
+<p>This is the power of building on a platform with <strong>synchronous composability</strong> — something that L2 rollup architectures fundamentally cannot provide.</p>
+
+<div class="image-placeholder">
+    <div class="prompt-label">[ Image: Full Platform Interaction ]</div>
+    <p class="prompt-text">Wide cinematic scene: a delivery drone landing on an autonomous charging pad in an urban rooftop setting at dusk. Between the drone and charger, five translucent holographic panels are visible in sequence, each showing one step of the transaction: (1) a map with search results, (2) two ID cards connecting, (3) a shield with checkmark, (4) coins flowing into a lock, (5) a verification seal. Below all of it, a glowing river of blockchain data flows like a foundation. The city skyline is visible in the background with other drones in flight. Cinematic sci-fi concept art, warm sunset tones mixed with cool cyan technology glow.</p>
+    <div class="prompt-id">IMG-FULL-001</div>
+</div>
+
+</div> <!-- .page-content -->
+
+<div class="footer">
+    > <a href="index.html">[RETURN TO ROOT]</a> | <a href="/use-cases.html">[USE CASES]</a> | End of Transmission_ <
+</div>
+
+    </div> <!-- .container -->
+</body>
+</html>

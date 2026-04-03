@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROBOTSHARES - Use Cases</title>
+
+    <link rel="icon" href="/img/rs-logo.jpg" type="image/jpeg">
+    <link rel="apple-touch-icon" href="/img/rs-logo.jpg">
+    <link rel="stylesheet" href="/style.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6NTFYK5EC1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6NTFYK5EC1');
+</script>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <a href="/" class="nav-logo">
+            <img src="/img/rs-logo.jpg" alt="Robotshares Logo">
+        </a>
+        <div class="nav-links">
+            <a href="/about.html">About</a>
+            <a href="/platform.html">Platform</a>
+            <a href="/use-cases.html">Use Cases</a>
+            <a href="/about-vprogs.html">vProgs</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+<h1>Use Cases</h1>
+<p class="subtitle">Machines working. Machines earning. Machines cooperating.</p>
+
+<div class="page-content">
+
+<p>Each scenario below uses the Robot Shares primitives — <a href="/platform.html">RS-ID, RS-Registry, RS-Pay, RS-Access, RS-Verify</a> — to show how autonomous machines transact and cooperate on Kaspa L1 without human intervention.</p>
+
+<!-- ============================================ -->
+<!-- USE CASE 1: Autonomous Charging Network      -->
+<!-- ============================================ -->
+
+<div class="use-case">
+    <h2>01 // Autonomous Charging Network</h2>
+    <p>A decentralized network of charging stations — solar-powered rooftop units, garage chargers, commercial fast-chargers — all registered on RS-Registry and earning KAS from any machine that needs power. No company runs the network. No app required. The machines negotiate directly.</p>
+
+    <h3>The Scenario</h3>
+    <p>A delivery drone (Bot0) is running low on battery mid-route. It needs to find the nearest compatible charger, negotiate a rate, pay for the session, and resume its delivery — all autonomously, in under 60 seconds.</p>
+
+    <div class="schematic">
+        <span class="schematic-label">charging network</span>
+<pre>
+                              +--[Charger C]--+
+                              |  solar rooftop |
+                              |  0.0008 KAS/kWh|
+                              +-------+--------+
+                                      |
+  +--[Bot0]--+     RS-Registry     +--+--+     +--[Charger A]--+
+  |  Drone   |------ query ------>| REG  |-----|  garage unit   |
+  |  28% batt|                    | vProg|     |  0.0015 KAS/kWh|
+  +----+-----+                    +--+---+     +----------------+
+       |                             |
+       |   Best match: Charger C     |         +--[Charger B]--+
+       |<----------------------------+         |  commercial    |
+       |                                       |  OFFLINE       |
+       |                                       +----------------+
+       |
+       |  Fly to Charger C
+       |  Authenticate (RS-ID)
+       |  Check permissions (RS-Access)
+       |  Lock 0.5 KAS escrow (RS-Pay)
+       |  Charge for 12 minutes
+       |  Charger submits proof (RS-Verify)
+       |  Escrow releases 0.38 KAS to Charger C
+       |  Refund 0.12 KAS to Bot0
+       |
+       v
+  Resume delivery route (92% battery)
+</pre>
+    </div>
+
+    <h3>Economic Model</h3>
+    <p>Anyone with a charger and a solar panel becomes a node in the network. The charger earns KAS for every session. The owner can set their own rates, availability windows, and compatible machine types — all configured in their RS-Registry entry. No platform takes a cut. The only fee is Kaspa's near-zero transaction cost.</p>
+
+    <p>Over time, a charger builds an on-chain reputation: sessions completed, uptime percentage, dispute rate. Machines prefer chargers with strong track records. The market self-regulates.</p>
+
+    <div class="image-placeholder">
+        <div class="prompt-label">[ Image: Charging Network ]</div>
+        <p class="prompt-text">A rooftop scene at golden hour. A compact solar-powered charging station (sleek, cylindrical, with solar panels folded open like petals) sits on a building rooftop. A delivery drone is landed on the charging pad, connected via a glowing energy beam. A holographic display floats above showing: battery percentage climbing, KAS tokens flowing from drone to station, and a live map showing 5 other charging stations in the neighborhood as glowing dots. The city stretches out behind. Clean futuristic industrial design, warm golden light with cyan tech accents.</p>
+        <div class="prompt-id">IMG-UC-CHARGE-001</div>
+    </div>
+</div>
+
+<div class="section-divider">- - - - - - - - - - - - -</div>
+
+<!-- ============================================ -->
+<!-- USE CASE 2: Drone Fleet Operations           -->
+<!-- ============================================ -->
+
+<div class="use-case">
+    <h2>02 // Drone Fleet Operations</h2>
+    <p>A fleet of autonomous drones — owned by different operators, serving different clients — shares airspace, coordinates handoffs, and settles payments for shared infrastructure. No central air traffic controller. The fleet self-organizes through on-chain coordination.</p>
+
+    <h3>The Scenario</h3>
+    <p>An e-commerce package needs to travel 40km across a metropolitan area. No single drone has the range. Three drones from different operators relay the package, each earning KAS for their leg of the journey.</p>
+
+    <div class="schematic">
+        <span class="schematic-label">relay delivery</span>
+<pre>
+  WAREHOUSE                 RELAY POINT A            RELAY POINT B              CUSTOMER
+  =========                 =============            =============              ========
+      |                          |                        |                        |
+      |      Drone-1 (Op.A)     |     Drone-2 (Op.B)     |    Drone-3 (Op.C)      |
+      |      Range: 15km        |     Range: 18km         |    Range: 12km         |
+      |                          |                        |                        |
+      +===== LEG 1: 14km ======>+                        |                        |
+      |  RS-Pay: 2.1 KAS        |                        |                        |
+      |                          |                        |                        |
+      |     Handoff Protocol:    |                        |                        |
+      |     1. RS-ID verify      |                        |                        |
+      |     2. RS-Access check   |                        |                        |
+      |     3. Cargo scan        |                        |                        |
+      |     4. RS-Verify proof   |                        |                        |
+      |     5. Custody transfer  |                        |                        |
+      |                          |                        |                        |
+      |                          +====== LEG 2: 17km ====>+                        |
+      |                          |  RS-Pay: 2.8 KAS       |                        |
+      |                          |                        |                        |
+      |                          |                        +===== LEG 3: 9km ======>+
+      |                          |                        |  RS-Pay: 1.5 KAS       |
+      |                          |                        |                        |
+      |                   TOTAL: 6.4 KAS across 3 operators                        |
+      |                   Settled atomically on Kaspa L1                           |
+      |                   Package delivered in 38 minutes                          |
+</pre>
+    </div>
+
+    <h3>Handoff Protocol</h3>
+    <p>Each relay point is a choreographed sequence:</p>
+    <ul class="flow-steps">
+        <li data-step="01 ">Incoming drone broadcasts approach to RS-Registry with cargo manifest hash</li>
+        <li data-step="02 ">Relay drone authenticates via RS-ID mutual credential exchange</li>
+        <li data-step="03 ">RS-Access confirms relay drone is authorized for this cargo class</li>
+        <li data-step="04 ">Physical handoff — both drones scan cargo, generate RS-Verify proof of intact transfer</li>
+        <li data-step="05 ">RS-Pay escrow for the completed leg releases to the delivering drone</li>
+        <li data-step="06 ">New escrow locks for the next leg</li>
+    </ul>
+
+    <p>If any step fails — wrong drone, damaged cargo, unauthorized operator — the handoff aborts and the escrow refunds. The package returns to the last verified custodian.</p>
+
+    <div class="image-placeholder">
+        <div class="prompt-label">[ Image: Drone Relay Handoff ]</div>
+        <p class="prompt-text">Two delivery drones hovering face-to-face at a designated relay point on a building rooftop marked with a glowing landing circle. Between them, a small package is suspended in mid-transfer, held by mechanical arms from both drones. Holographic data streams flow between the drones showing credential exchange, cargo verification, and payment confirmation. A transparent route map floats above showing the three-leg journey across the city. Night scene, dramatic uplighting, volumetric fog catching the drone lights. Cinematic drone photography style, teal and amber palette.</p>
+        <div class="prompt-id">IMG-UC-DRONE-001</div>
+    </div>
+</div>
+
+<div class="section-divider">- - - - - - - - - - - - -</div>
+
+<!-- ============================================ -->
+<!-- USE CASE 3: Sensor Data Marketplace          -->
+<!-- ============================================ -->
+
+<div class="use-case">
+    <h2>03 // Sensor Data Marketplace</h2>
+    <p>Thousands of independent sensors — air quality monitors, traffic cameras, weather stations, soil moisture probes — sell their verified data streams to any buyer willing to pay. The data is ZK-proven authentic. The payments are automatic. The marketplace has no middleman.</p>
+
+    <h3>The Scenario</h3>
+    <p>An agricultural AI needs real-time soil moisture data across a 500-acre region. Instead of deploying its own sensors, it subscribes to 47 independent soil probes already registered on RS-Registry, each owned by different farmers. The AI pays per-reading in KAS. Each reading is RS-Verified.</p>
+
+    <div class="schematic">
+        <span class="schematic-label">data marketplace</span>
+<pre>
+  SOIL PROBES (47 independent)              RS-VERIFY           DATA CONSUMER
+  ============================              =========           =============
+                                                                (Agri-AI)
+  [Probe-01] --+--> reading --+
+  [Probe-02] --+              |
+  [Probe-03] --+              +---> Tier 1: Origin sig ----+
+  [Probe-04] --+              |     (each probe signs      |
+     ...       |              |      with RS-ID key)       |
+  [Probe-47] --+              |                            |
+                              +---> Tier 2: Anomaly check -+--> ZK Proof
+                              |     (ML flags outliers,    |    of dataset
+                              |      cross-ref neighbors)  |    integrity
+                              |                            |
+                              +---> Tier 3: Cross-verify --+
+                                    (nearby probes must         |
+                                     broadly agree)             |
+                                                                |
+                                              Settled on Kaspa L1
+                                                                |
+  PAYMENT FLOW:                                                 v
+  =============                                          Agri-AI receives
+  Agri-AI subscription covenant                          47 verified readings
+  releases 0.0001 KAS per reading                        + single ZK proof
+  to each probe's wallet automatically                   of full dataset
+</pre>
+    </div>
+
+    <h3>Why ZK Matters Here</h3>
+    <p>Without RS-Verify, the AI has to trust each sensor's raw data — any one could be spoofed, miscalibrated, or malicious. With ZK-proven data verification, the AI receives a single compact proof that attests: these 47 readings came from registered, authenticated devices, passed anomaly detection, and are cross-corroborated by neighbors. The AI can act on this data with cryptographic confidence.</p>
+
+    <p><strong>Privacy bonus:</strong> Farmers selling soil data might not want to reveal their exact field locations or proprietary irrigation schedules. RS-Verify proofs can attest to data quality without exposing the underlying details — the buyer gets "verified moisture level for zone 7" without learning the farm's GPS coordinates.</p>
+
+    <div class="image-placeholder">
+        <div class="prompt-label">[ Image: Sensor Marketplace ]</div>
+        <p class="prompt-text">An aerial view of farmland at dawn, with dozens of small glowing sensor stakes embedded in the soil across multiple fields. Each sensor emits a thin beam of light upward, carrying data. The beams converge into a central floating holographic marketplace — a translucent cube showing real-time data feeds, buyer/seller connections, and micro-payment flows as tiny golden particles. An AI entity (abstract, geometric, luminous) hovers above the marketplace consuming the data streams. Fields are rich green and brown, technology elements glow cyan and gold. Drone photography meets data visualization aesthetic.</p>
+        <div class="prompt-id">IMG-UC-SENSOR-001</div>
+    </div>
+</div>
+
+<div class="section-divider">- - - - - - - - - - - - -</div>
+
+<!-- ============================================ -->
+<!-- USE CASE 4: Machine-to-Machine Logistics     -->
+<!-- ============================================ -->
+
+<div class="use-case">
+    <h2>04 // Machine-to-Machine Logistics</h2>
+    <p>Autonomous ground robots, conveyor systems, and warehouse bots coordinate complex logistics chains — receiving shipments, sorting packages, staging deliveries — without a centralized warehouse management system. Each machine is an independent economic agent, earning KAS for the work it performs.</p>
+
+    <h3>The Scenario</h3>
+    <p>A shipment arrives at a distribution hub. From dock to delivery vehicle, five different autonomous machines handle it — each owned by a different operator, each paid per-task.</p>
+
+    <div class="schematic">
+        <span class="schematic-label">logistics chain</span>
+<pre>
+  DOCK                SORT              STORE              STAGE             LOAD
+  ====                ====              =====              =====             ====
+
+  +--------+     +----------+     +-----------+     +-----------+     +----------+
+  | Unload |     | Sort-Bot |     | Store-Bot |     | Stage-Bot |     | Load-Bot |
+  | Bot    |---->| scans &  |---->| places in |---->| retrieves |---->| loads to |
+  | (Op.A) |     | routes   |     | rack slot |     | for order |     | vehicle  |
+  |        |     | (Op.B)   |     | (Op.C)    |     | (Op.C)   |     | (Op.D)   |
+  +---+----+     +----+-----+     +-----+-----+     +-----+-----+     +----+-----+
+      |               |                 |                 |                 |
+      |               |                 |                 |                 |
+  RS-Verify:      RS-Verify:        RS-Verify:       RS-Verify:       RS-Verify:
+  photo proof     barcode +         slot location    retrieval +       loaded +
+  of intact       weight match      + temp reading   condition        manifest
+  receipt                                             check            match
+      |               |                 |                 |                 |
+      +-------+-------+---------+-------+--------+-------+-------+---------+
+              |                 |                 |               |
+         0.02 KAS          0.03 KAS          0.01 KAS       0.02 KAS
+          to Op.A           to Op.B           to Op.C         to Op.D
+              |                 |                 |               |
+              +--------+--------+---------+-------+               |
+                       |                  |                       |
+                       v                  v                       v
+                  All settled atomically on Kaspa L1 via RS-Pay covenant chain
+</pre>
+    </div>
+
+    <h3>Chain of Custody</h3>
+    <p>Every handoff between machines generates an RS-Verify proof — a cryptographic receipt proving the package was in the right condition at the right place at the right time. The full chain of custody is an immutable, ZK-proven audit trail on Kaspa L1. If a package arrives damaged, the proofs pinpoint exactly which leg of the chain had the issue.</p>
+
+    <p><strong>Composability in action:</strong> The entire five-step logistics chain — receiving, sorting, storing, staging, loading — settles as a batch on Kaspa L1 through a single vProg batch proof. Five operators, five machines, five payments, five verification proofs — one atomic settlement. This is only possible because vProgs provide synchronous composability on L1.</p>
+
+    <div class="image-placeholder">
+        <div class="prompt-label">[ Image: Autonomous Warehouse ]</div>
+        <p class="prompt-text">Interior of a futuristic automated warehouse, wide angle. No humans present. Various autonomous robots are working: a forklift-style bot unloading from a dock, a sorting arm scanning barcodes on a conveyor belt, small ground robots carrying packages through aisles of tall shelving, a loading bot placing packages into an autonomous delivery van at the far end. Each robot has a small holographic status display floating above it showing its current task and KAS earnings. Thin glowing lines on the floor show optimized routes. The overall atmosphere is organized, efficient, mechanical. Industrial lighting with subtle cyan accents on the robots. Wide-angle architectural interior photography style.</p>
+        <div class="prompt-id">IMG-UC-LOGISTICS-001</div>
+    </div>
+</div>
+
+<div class="section-divider">= = = = = = = = = = = = =</div>
+
+<!-- ============================================ -->
+<!-- COMPARISON: WHY KASPA                        -->
+<!-- ============================================ -->
+
+<h2 style="text-align:center; color:#FFFF00;">Why Kaspa, Not Another Chain?</h2>
+
+<p>Every use case above requires specific properties from the settlement layer. Here's why Kaspa with vProgs is the right foundation:</p>
+
+<table class="comparison-table">
+    <tr>
+        <th>Requirement</th>
+        <th>EVM L1s</th>
+        <th>L2 Rollups</th>
+        <th>Kaspa + vProgs</th>
+    </tr>
+    <tr>
+        <td>Sub-second finality</td>
+        <td>Minutes (12s blocks + confirmations)</td>
+        <td>Minutes to hours (challenge period)</td>
+        <td>Instant (DagKnight)</td>
+    </tr>
+    <tr>
+        <td>Micro-tx viable</td>
+        <td>$0.50-50+ gas kills IoT</td>
+        <td>$0.01-0.10, still adds up at scale</td>
+        <td>Fractions of a cent</td>
+    </tr>
+    <tr>
+        <td>Atomic cross-app tx</td>
+        <td>Yes (but congestion)</td>
+        <td>No (bridge delays, fragmentation)</td>
+        <td>Yes (synchronous composability)</td>
+    </tr>
+    <tr>
+        <td>Censorship resistance</td>
+        <td>PoS validator cartels</td>
+        <td>Centralized sequencers</td>
+        <td>Pure PoW, no capture</td>
+    </tr>
+    <tr>
+        <td>Scalability</td>
+        <td>Limited by block gas</td>
+        <td>Limited by DA layer</td>
+        <td>Horizontal (prover market)</td>
+    </tr>
+    <tr>
+        <td>Privacy</td>
+        <td>All state public</td>
+        <td>All state public</td>
+        <td>ZK proofs hide details</td>
+    </tr>
+    <tr>
+        <td>MEV protection</td>
+        <td>Rampant front-running</td>
+        <td>Sequencer can extract</td>
+        <td>DAG + deterministic ordering</td>
+    </tr>
+</table>
+
+<p>Machines can't afford to wait. They can't afford high fees. They can't afford to be censored. They can't afford fragmented liquidity across bridges. Kaspa with vProgs eliminates all of these constraints at the consensus layer.</p>
+
+<div class="image-placeholder">
+    <div class="prompt-label">[ Image: Kaspa vs Others ]</div>
+    <p class="prompt-text">Split-screen triptych comparison. Left panel: a congested, overheated Ethereum-style blockchain represented as a single narrow pipe with transactions queued and overflowing, machines waiting in line, red warning indicators. Center panel: a fragmented L2 landscape shown as isolated islands connected by rickety bridges, machines stuck waiting at bridge crossings. Right panel: Kaspa's blockDAG shown as a wide, flowing river of parallel streams all merging smoothly, machines transacting freely across the entire surface, everything moving fast. The Kaspa panel is bright and efficient while the others are constrained and problematic. Infographic meets concept art style, clear visual storytelling.</p>
+    <div class="prompt-id">IMG-UC-COMPARE-001</div>
+</div>
+
+</div> <!-- .page-content -->
+
+<div class="footer">
+    > <a href="index.html">[RETURN TO ROOT]</a> | <a href="/platform.html">[PLATFORM]</a> | End of Transmission_ <
+</div>
+
+    </div> <!-- .container -->
+</body>
+</html>
