@@ -28,11 +28,13 @@ body {
 
 /* --- NEW: Logo Styling --- */
 .nav-logo img {
-    height: 50px; /* Control the size of the logo */
+    height: 50px;
     width: 50px;
-    border-radius: 50%; /* This makes the image round */
+    border-radius: 4px;
     border: 2px solid #33aeef;
-    display: block; /* Removes any extra space below the image */
+    display: block;
+    object-fit: cover;
+    background-color: #0a1423;
     transition: transform 0.3s ease;
 }
 
