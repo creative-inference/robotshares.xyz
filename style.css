@@ -112,7 +112,125 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Style for content coming from WordPress */
+/* --- Homepage --- */
+.hero-tagline {
+    font-size: 1.4em;
+    color: #FFFF00;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(255, 255, 0, 0.4);
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.hero-sub {
+    color: #a0c9d1;
+    font-size: 1.05em;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 20px 0;
+    border: 2px solid #33aeef;
+    box-shadow: 0 0 20px rgba(51, 174, 239, 0.3);
+}
+
+.home-section {
+    text-align: left;
+    margin: 30px 0;
+    padding-top: 20px;
+    border-top: 1px solid #1a3a4a;
+}
+
+.home-section h2 {
+    color: #FFFF00;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 5px rgba(255, 255, 0, 0.3);
+}
+
+.primitive-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.primitive-card {
+    border: 1px solid #1a3a4a;
+    border-left: 3px solid #33aeef;
+    padding: 12px 15px;
+    background-color: rgba(10, 20, 35, 0.5);
+    border-radius: 4px;
+    text-align: left;
+}
+
+.primitive-card h3 {
+    color: #33aeef;
+    font-size: 0.9em;
+    margin: 0 0 5px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.primitive-card p {
+    color: #a0c9d1;
+    font-size: 0.8em;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.cta-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 25px 0;
+}
+
+.cta-links a {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #33aeef;
+    border-radius: 4px;
+    color: #33aeef;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.cta-links a:hover {
+    background-color: rgba(51, 174, 239, 0.2);
+    color: #FFFF00;
+    border-color: #FFFF00;
+    text-decoration: none;
+}
+
+.home-quote {
+    border-left: 3px solid #FFFF00;
+    padding: 10px 20px;
+    margin: 20px 0;
+    color: #a0c9d1;
+    font-style: italic;
+    font-size: 0.95em;
+    line-height: 1.7;
+    background-color: rgba(10, 20, 35, 0.4);
+}
+
+@media (max-width: 600px) {
+    .primitive-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Style for content pages */
 .page-content {
     text-align: left;
     line-height: 1.8;

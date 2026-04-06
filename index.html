@@ -1,36 +1,29 @@
-<!-- src/pages/index.ejs -->
-
-<!-- src/templates/partials/header.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROBOTSHARES - Machine to Machine Economy</title>
-    
+    <title>ROBOTSHARES - Machines That Own Themselves</title>
+    <meta name="description" content="Robot Shares is building the Machine-to-Machine economy on Kaspa. Autonomous machines with on-chain identity, payments, and verified data — powered by vProgs.">
+
     <link rel="icon" href="/img/rs-logo.jpg" type="image/jpeg">
     <link rel="apple-touch-icon" href="/img/rs-logo.jpg">
-
-    <!-- THE FIX: Add a leading slash -->
-    <link rel="stylesheet" href="/style.css"> 
+    <link rel="stylesheet" href="/style.css">
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6NTFYK5EC1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-6NTFYK5EC1');
 </script>
 </head>
 <body>
 
     <nav class="top-nav">
-        <!-- THE FIX: Add a leading slash -->
         <a href="/" class="nav-logo">
             <img src="/img/rs-logo.jpg" alt="Robotshares Logo">
         </a>
-        
         <div class="nav-links">
             <a href="/about.html">About</a>
             <a href="/platform.html">Platform</a>
@@ -44,19 +37,170 @@
 
 <h1>ROBOTSHARES</h1>
 
-<p>
-    Powering the future <span class="highlight">Machine-to-Machine Economy</span>.
-    <br>
-    Intelligent <span class="highlight">AI Agents</span>, transacting autonomously.
-</p>
-<p>
-    Built on <a href="https://kaspa.org" target="_blank" class="highlight">Kaspa</a> with <a href="/about-vprogs.html" class="highlight">vProgs</a>.
-</p>
+<p class="hero-tagline">Machines that own themselves and pay each other.</p>
+<p class="hero-sub">On-chain identity, autonomous payments, and verified data for the Machine-to-Machine economy.</p>
+
+<img src="/img/why-kaspa-fleet.jpg" alt="Autonomous machine fleet on the Kaspa blockDAG" class="hero-image">
+
+<p style="text-align:left;">Robot Shares is a modular infrastructure stack that gives autonomous machines everything they need to operate as independent economic agents. Drones find and pay charging stations. Sensors sell verified data. Warehouse bots coordinate logistics chains. No humans in the loop. No platform taking a cut. Every transaction settles on <a href="https://kaspa.org" target="_blank">Kaspa</a> L1 with instant finality.</p>
+
+<!-- ============================== -->
+<!-- THE FIVE PRIMITIVES             -->
+<!-- ============================== -->
+
+<div class="home-section">
+    <h2>The Platform</h2>
+    <p style="text-align:left; color:#a0c9d1; font-size:0.95em;">Five on-chain primitives — each a sovereign <a href="/about-vprogs.html">vProg</a> on Kaspa L1 — give machines the building blocks for autonomous operation.</p>
+
+    <div class="primitive-grid">
+        <div class="primitive-card">
+            <h3>RS-ID</h3>
+            <p>Self-sovereign machine identity. Cryptographic DID anchored to L1. No authority can revoke it.</p>
+        </div>
+        <div class="primitive-card">
+            <h3>RS-Registry</h3>
+            <p>On-chain machine directory. Publish services, find peers, discover chargers — all ZK-verified.</p>
+        </div>
+        <div class="primitive-card">
+            <h3>RS-Pay</h3>
+            <p>Covenant-based escrow and micro-payments. Machines pay each other instantly in KAS.</p>
+        </div>
+        <div class="primitive-card">
+            <h3>RS-Access</h3>
+            <p>Role-based permissions. Machines authenticate peers with zero-knowledge credential checks.</p>
+        </div>
+        <div class="primitive-card">
+            <h3>RS-Verify</h3>
+            <p>Three-tier data verification. ZK proofs attest to data integrity without exposing raw readings.</p>
+        </div>
+        <div class="primitive-card">
+            <h3>Kaspa L1</h3>
+            <p>Pure PoW settlement. BlockDAG parallel processing. DagKnight instant finality. Fractions-of-a-cent fees.</p>
+        </div>
+    </div>
+
+    <div class="cta-links">
+        <a href="/platform.html">Explore the Platform</a>
+    </div>
+</div>
+
+<!-- ============================== -->
+<!-- HOW IT WORKS                    -->
+<!-- ============================== -->
+
+<div class="home-section">
+    <h2>How It Works</h2>
+    <p style="text-align:left; color:#a0c9d1; font-size:0.95em;">A drone needs to charge mid-route. Here's what happens — autonomously, in under 60 seconds:</p>
+
+    <div class="schematic">
+        <span class="schematic-label">example</span>
+<pre>
+  DRONE (28% battery)                              CHARGER (solar rooftop)
+  ===================                              ====================
+        |                                                |
+        | 1. RS-REGISTRY: "Find charger near me"         |
+        |----------------------------------------------->|
+        |                                                |
+        | 2. RS-ID: Mutual credential exchange           |
+        |<---------------------------------------------->|
+        |                                                |
+        | 3. RS-ACCESS: Verify charging permission (ZK)  |
+        |----------------------------------------------->|
+        |                                                |
+        | 4. RS-PAY: Lock 0.5 KAS in escrow covenant     |
+        |----------------------------------------------->|
+        |                                                |
+        |            *** 12 MIN CHARGE ***               |
+        |<===============================================>|
+        |                                                |
+        | 5. RS-VERIFY: Charge-complete proof             |
+        |<-----------------------------------------------|
+        |                                                |
+        | 6. RS-PAY: Escrow releases KAS to charger      |
+        |----------------------------------------------->|
+        |                                                |
+        |    ALL SIX STEPS: ONE ATOMIC TX ON KASPA L1    |
+        |                                                |
+        v
+   Resume delivery (92% battery)
+</pre>
+    </div>
+
+    <p style="text-align:left; color:#a0c9d1; font-size:0.95em;">Discovery, authentication, authorization, payment, service, verification — all in one atomic transaction. If any step fails, everything rolls back. No partial states. No stuck funds.</p>
+
+    <div class="cta-links">
+        <a href="/use-cases.html">See More Use Cases</a>
+    </div>
+</div>
+
+<!-- ============================== -->
+<!-- WHY KASPA                       -->
+<!-- ============================== -->
+
+<div class="home-section">
+    <h2>Why Kaspa</h2>
+
+    <div class="home-quote">Machines operating without human oversight need a network that cannot be captured, cannot be censored, and cannot be stopped. That's why we build on Kaspa.</div>
+
+    <table class="comparison-table">
+        <tr>
+            <th>Machines Need</th>
+            <th>Kaspa Delivers</th>
+        </tr>
+        <tr>
+            <td>Can't wait for finality</td>
+            <td>Instant (DagKnight consensus)</td>
+        </tr>
+        <tr>
+            <td>Billions of micro-transactions</td>
+            <td>Fractions of a cent per tx</td>
+        </tr>
+        <tr>
+            <td>Can't be censored</td>
+            <td>Pure PoW — no validators to bribe</td>
+        </tr>
+        <tr>
+            <td>Atomic multi-step operations</td>
+            <td>Synchronous composability on L1</td>
+        </tr>
+        <tr>
+            <td>Scale without limits</td>
+            <td>Off-chain ZK execution, horizontal prover market</td>
+        </tr>
+    </table>
+
+    <div class="cta-links">
+        <a href="/why-kaspa.html">Full Breakdown</a>
+        <a href="/about-vprogs.html">Learn About vProgs</a>
+    </div>
+</div>
+
+<!-- ============================== -->
+<!-- WHAT WE'RE BUILDING             -->
+<!-- ============================== -->
+
+<div class="home-section">
+    <h2>What We're Building</h2>
+    <p style="text-align:left; color:#a0c9d1; font-size:0.95em;">We're starting with <strong style="color:#28c2c5;">Bot0 and Bot1</strong> — a simple autonomous robot that navigates a sandbox, reports diagnostics, and independently pays a charger bot for energy through Kaspa. From there:</p>
+
+    <ul class="flow-steps">
+        <li data-step=">> ">Decentralized charging networks — any charger earns KAS from any machine</li>
+        <li data-step=">> ">Drone fleet relay — multi-operator package delivery with on-chain handoffs</li>
+        <li data-step=">> ">Sensor data marketplace — verified IoT data sold per-reading</li>
+        <li data-step=">> ">Autonomous logistics — warehouse bots coordinating without a central system</li>
+    </ul>
+
+    <p style="text-align:left; color:#a0c9d1; font-size:0.95em;">The Kaspa <strong style="color:#28c2c5;">Toccata hard fork</strong> (mid-2026) delivers the covenant and ZK verification infrastructure these applications build on. The runtime and proving pipeline are implemented and under review. We're building now so we're ready when it ships.</p>
+
+    <div class="cta-links">
+        <a href="/about.html">Our Story</a>
+        <a href="/use-cases.html">Use Cases</a>
+    </div>
+</div>
 
 <div class="footer">
-    <!-- The dynamic nav has been REMOVED from here -->
     <div class="footer-text">
-        > System Online_ | Prepare for Robot Takeover. <
+        > System Online_ | Built on <a href="https://kaspa.org" target="_blank">Kaspa</a> <
     </div>
 </div>
 
